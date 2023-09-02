@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  localstack:
+    container_name: "localstack"
+    image: localstack/localstack:latest
+    ports:
+      - "4566:4566"
+
+  runningReader:
+    image: postgres
+    restart: always
+    environment:
+      TZ: Asia/Seoul
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD_FILE: /run/secrets/running_reader_password
+    ports:
+      - "5432:5432"
+    secrets:
+      - running_reader_password
+
+secrets:
+  running_reader_password:
+    file: ~/service/secrets/running_reader_password.txt
