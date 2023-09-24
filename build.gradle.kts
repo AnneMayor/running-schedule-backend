@@ -5,8 +5,8 @@ val bootJar: BootJar by tasks
 bootJar.enabled = false
 
 plugins {
-    id("org.springframework.boot") version "3.1.3"
-    id("io.spring.dependency-management") version "1.1.3"
+    id("org.springframework.boot")
+    id("io.spring.dependency-management")
     kotlin("jvm") version "1.8.22"
     kotlin("plugin.spring") version "1.8.22"
 }
