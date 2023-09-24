@@ -15,6 +15,8 @@ plugins {
 
 group = "com.anne"
 version = "0.0.1-SNAPSHOT"
+val coroutineVersion: String by rootProject
+val jsoupVersion: String by rootProject
 
 java {
 	sourceCompatibility = JavaVersion.VERSION_17
@@ -25,10 +27,14 @@ repositories {
 }
 
 dependencies {
+	implementation(project(":domain"))
 	implementation("org.springframework.boot:spring-boot-starter")
+	implementation("org.springframework.boot:spring-boot-starter-batch")
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	implementation("org.jsoup:jsoup:$jsoupVersion")
 }
 
 tasks.withType<KotlinCompile> {

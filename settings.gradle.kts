@@ -2,6 +2,7 @@ rootProject.name = "running-schedule"
 
 include("api")
 include("batch" , "infra-rds")
+include("domain")
 
 pluginManagement {
     repositories {
