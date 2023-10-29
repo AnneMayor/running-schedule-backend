@@ -17,6 +17,7 @@ class Race(
     var day: Instant?,
     var descriptionUrl: String?,
     var host: String?,
+    var phoneNumber: String?,
     var startOfRegistration: Instant?,
     var endOfRegistration: Instant?,
     var entryFee: Int?,
