@@ -17,6 +17,7 @@ group = "com.anne"
 version = "0.0.1-SNAPSHOT"
 val coroutineVersion: String by rootProject
 val jsoupVersion: String by rootProject
+val mapStructVersion: String by rootProject
 
 java {
 	sourceCompatibility = JavaVersion.VERSION_17
@@ -31,6 +32,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter")
 	implementation("org.springframework.boot:spring-boot-starter-batch")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion")
+	implementation("org.mapstruct:mapstruct:$mapStructVersion")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")

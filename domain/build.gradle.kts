@@ -17,6 +17,7 @@ group = "com.anne"
 version = "0.0.1-SNAPSHOT"
 val jsoupVersion: String by rootProject
 val kotestVersion: String by rootProject
+val mapStructVersion: String by rootProject
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -32,6 +33,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    implementation("org.mapstruct:mapstruct:$mapStructVersion")
     implementation("org.jsoup:jsoup:$jsoupVersion")
     testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
 }
