@@ -18,6 +18,7 @@ version = "0.0.1-SNAPSHOT"
 val coroutineVersion: String by rootProject
 val jsoupVersion: String by rootProject
 val mapStructVersion: String by rootProject
+val kotestVersion: String by rootProject
 
 java {
 	sourceCompatibility = JavaVersion.VERSION_17
@@ -37,6 +38,7 @@ dependencies {
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	implementation("org.jsoup:jsoup:$jsoupVersion")
+	testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
 }
 
 tasks.withType<KotlinCompile> {

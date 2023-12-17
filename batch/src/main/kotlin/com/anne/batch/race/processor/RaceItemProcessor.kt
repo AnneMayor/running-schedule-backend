@@ -6,6 +6,16 @@ import org.springframework.batch.item.ItemProcessor
 
 class RaceItemProcessor : ItemProcessor<RaceItem, RaceDto> {
     override fun process(item: RaceItem): RaceDto? {
-        TODO("RaceItem 객체를 RaceDto 객체로 변환한다.")
+        return RaceDto(
+            name = item.name,
+            description = item.description,
+            place = item.place,
+            day = item.day,
+            descriptionUrl = item.descriptionUrl,
+            host = item.host,
+            entryFee = item.entryFee,
+            startOfRegistration = item.startOfRegistration,
+            endOfRegistration = item.endOfRegistration,
+        )
     }
 }
