@@ -1,1 +1,32 @@
+spring:
+  profiles:
+    include:
+      - domain
+      - infra-rds
+    active: local
+  datasource:
+    runningdb:
+      writer:
+        maximum-pool-size: 10
+        minimum-idle: 10
+      reader:
+        maximum-pool-size: 10
+        minimum-idle: 10
+    using:
+      runningdb: true
 
+logging:
+  level:
+    root: info
+
+---
+spring:
+  config.activate.on-profile: local, test
+  datasource:
+    runningdb:
+      writer:
+        maximum-pool-size: 5
+        minimum-idle: 5
+      reader:
+        maximum-pool-size: 5
+        minimum-idle: 5

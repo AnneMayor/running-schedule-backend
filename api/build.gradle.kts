@@ -16,6 +16,7 @@ plugins {
 group = "com.anne"
 version = "0.0.1-SNAPSHOT"
 val kotestVersion:String by rootProject
+val mapStructVersion:String by rootProject
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -25,9 +26,15 @@ repositories {
     mavenCentral()
 }
 
+allOpen {
+    annotation("org.springframework.stereotype.Service")
+}
+
 dependencies {
+    implementation(project(":domain"))
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -35,6 +42,7 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
+    implementation("org.mapstruct:mapstruct:$mapStructVersion")
     testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
 }
 

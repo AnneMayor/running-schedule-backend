@@ -5,11 +5,15 @@ import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Table
+import org.hibernate.envers.AuditOverride
+import org.hibernate.envers.Audited
 import org.springframework.data.annotation.Id
 import java.time.Instant
 
 @Entity
 @Table
+@Audited
+@AuditOverride(forClass = BaseEntity::class)
 class Race(
     var name: String?,
     var description: String?,
