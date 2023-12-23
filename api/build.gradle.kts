@@ -15,7 +15,6 @@ plugins {
 
 group = "com.anne"
 version = "0.0.1-SNAPSHOT"
-val kotestVersion:String by rootProject
 val mapStructVersion:String by rootProject
 
 java {
@@ -45,7 +44,6 @@ dependencies {
     implementation("org.mapstruct:mapstruct:$mapStructVersion")
     kapt("org.mapstruct:mapstruct-processor:$mapStructVersion")
     kaptTest("org.mapstruct:mapstruct-processor:$mapStructVersion")
-    testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
 }
 
 tasks.withType<KotlinCompile> {

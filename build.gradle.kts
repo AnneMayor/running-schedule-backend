@@ -20,6 +20,9 @@ repositories {
     mavenCentral()
 }
 
+val testContainersVersion: String by rootProject
+val kotestVersion: String by rootProject
+
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -43,5 +46,12 @@ allprojects {
 
     tasks.withType<Test> {
         useJUnitPlatform()
+    }
+
+    dependencies {
+        testImplementation("org.testcontainers:testcontainers:$testContainersVersion")
+        testImplementation("org.testcontainers:postgresql:$testContainersVersion")
+        testImplementation("org.testcontainers:junit-jupiter:$testContainersVersion")
+        testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
     }
 }

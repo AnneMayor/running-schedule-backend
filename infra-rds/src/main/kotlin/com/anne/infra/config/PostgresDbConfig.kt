@@ -92,7 +92,7 @@ class PostgresDbConfig {
 
 class ReplicationRoutingDataSource : AbstractRoutingDataSource() {
 
-    override fun determineCurrentLookupKey(): Any? {
+    override fun determineCurrentLookupKey(): Any {
         if (TransactionSynchronizationManager.isCurrentTransactionReadOnly()) {
             return DATASOURCE_READER
         }
