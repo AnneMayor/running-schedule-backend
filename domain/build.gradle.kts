@@ -3,8 +3,8 @@ import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 val jar: Jar by tasks
 val bootJar: BootJar by tasks
-bootJar.enabled = true
-jar.enabled = false
+bootJar.enabled = false
+jar.enabled = true
 
 plugins {
     id("org.springframework.boot")
@@ -15,8 +15,11 @@ plugins {
 
 group = "com.anne"
 version = "0.0.1-SNAPSHOT"
-val kotestVersion:String by rootProject
-val mapStructVersion:String by rootProject
+val jsoupVersion: String by rootProject
+val kotestVersion: String by rootProject
+val mapStructVersion: String by rootProject
+val hibernateEnversVersion: String by rootProject
+val modelMapperVersion: String by rootProject
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -26,25 +29,33 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    all {
+        exclude("org.apache.logging.log4j", "log4j-slf4j-impl")
+    }
+}
+
 allOpen {
     annotation("org.springframework.stereotype.Service")
 }
 
+kotlin.sourceSets.main {
+    setBuildDir("$buildDir")
+}
+
 dependencies {
-    implementation(project(":domain"))
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
+    api(project(":infra-rds"))
+    implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
+    implementation("org.hibernate:hibernate-envers:$hibernateEnversVersion")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("io.projectreactor:reactor-test")
+    implementation("org.modelmapper:modelmapper:$modelMapperVersion")
     implementation("org.mapstruct:mapstruct:$mapStructVersion")
     kapt("org.mapstruct:mapstruct-processor:$mapStructVersion")
     kaptTest("org.mapstruct:mapstruct-processor:$mapStructVersion")
+    implementation("org.jsoup:jsoup:$jsoupVersion")
     testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
 }
 

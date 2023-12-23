@@ -5,14 +5,12 @@ val bootJar: BootJar by tasks
 bootJar.enabled = false
 
 plugins {
-    id("org.springframework.boot") version "3.1.3"
-    id("io.spring.dependency-management") version "1.1.3"
-    kotlin("jvm") version "1.8.22"
-    kotlin("plugin.spring") version "1.8.22"
+    id("org.springframework.boot")
+    id("io.spring.dependency-management")
+    kotlin("plugin.allopen")
+    kotlin("jvm")
+    kotlin("kapt")
 }
-
-group = "com.anne"
-version = "0.0.1-SNAPSHOT"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -28,13 +26,22 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        freeCompilerArgs += "-Xjsr305=strict"
-        jvmTarget = "17"
-    }
-}
+allprojects {
+    apply(plugin = "kotlin")
+    apply(plugin = "kotlin-kapt")
+    apply(plugin = "org.jetbrains.kotlin.plugin.allopen")
 
-tasks.withType<Test> {
-    useJUnitPlatform()
+    group = "com.anne.running-schedule"
+    version = "1.0.0-SNAPSHOT"
+
+    tasks.withType<KotlinCompile> {
+        kotlinOptions {
+            freeCompilerArgs = listOf("-Xjsr305=strict")
+            jvmTarget = "17"
+        }
+    }
+
+    tasks.withType<Test> {
+        useJUnitPlatform()
+    }
 }

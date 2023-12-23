@@ -1,0 +1,87 @@
+spring:
+  jpa:
+    open-in-view: false
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+        query.in_clause_parameter_padding: true
+        default_batch_fetch_size: 50
+        connection.provider_disables_autocommit: true
+      org:
+        hibernate:
+          envers:
+            store_data_at_delete: true
+    hibernate:
+      ddl-auto: none
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  datasource:
+    runningdb:
+      writer:
+        driver-class-name: org.postgresql.Driver
+        auto-commit: false
+        connection-timeout: 3000
+        max-lifetime: 50000
+      reader:
+        driver-class-name: org.postgresql.Driver
+        auto-commit: true
+        connection-timeout: 3000
+        max-lifetime: 50000
+
+---
+spring.config.activate.on-profile: test
+spring:
+  datasource:
+    runningdb:
+      writer:
+        driver-class-name: org.postgresql.Driver
+        jdbc-url: jdbc:postgresql://localhost:5432/postgres
+        username: admin
+        password: runningIsMyLife!
+
+      reader:
+        driver-class-name: org.postgresql.Driver
+        jdbc-url: jdbc:postgresql://localhost:5432/postgres
+        username: admin
+        password: runningIsMyLife!
+
+---
+spring.config.activate.on-profile: local
+spring:
+  datasource:
+    runningdb:
+      writer:
+        driver-class-name: org.postgresql.Driver
+        jdbc-url: jdbc:postgresql://localhost:5432/postgres
+        username: admin
+        password: runningIsMyLife!
+
+      reader:
+        driver-class-name: org.postgresql.Driver
+        jdbc-url: jdbc:postgresql://localhost:5432/postgres
+        username: admin
+        password: runningIsMyLife!
+
+  jpa:
+    show-sql: true
+
+---
+spring.config.activate.on-profile: dev
+spring:
+  datasource:
+    runningdb:
+      writer:
+        jdbc-url: ${JDBC_URL_RUNNING_WRITER}
+      reader:
+        jdbc-url: ${JDBC_URL_RUNNING_READER}
+
+---
+spring.config.activate.on-profile: prod
+spring:
+  datasource:
+    runningdb:
+      writer:
+        jdbc-url: ${JDBC_URL_RUNNING_WRITER}
+      reader:
+        jdbc-url: ${JDBC_URL_RUNNING_READER}
