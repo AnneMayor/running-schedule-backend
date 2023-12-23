@@ -7,18 +7,19 @@ services:
     ports:
       - "4566:4566"
 
-  runningReader:
+  running:
     image: postgres
+    container_name: "running"
     restart: always
     environment:
       TZ: Asia/Seoul
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD_FILE: /run/secrets/running_reader_password
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD_FILE: /run/secrets/running_db_password
     ports:
       - "5432:5432"
     secrets:
-      - running_reader_password
+      - running_db_password
 
 secrets:
-  running_reader_password:
-    file: ~/service/secrets/running_reader_password.txt
+  running_db_password:
+    file: ~/play/secrets/running_db_password.txt
