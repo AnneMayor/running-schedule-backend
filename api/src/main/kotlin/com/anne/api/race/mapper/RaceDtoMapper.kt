@@ -5,9 +5,12 @@ import com.anne.api.race.res.RaceRes
 import com.anne.domain.race.dto.RaceDto
 import org.mapstruct.InjectionStrategy
 import org.mapstruct.Mapper
+import org.mapstruct.ReportingPolicy
 
 @Mapper(
-    injectionStrategy = InjectionStrategy.CONSTRUCTOR
+    componentModel = "spring",
+    injectionStrategy = InjectionStrategy.CONSTRUCTOR,
+    unmappedTargetPolicy = ReportingPolicy.IGNORE,
 )
 interface RaceDtoMapper {
     fun toRes(dto: RaceDto?): RaceRes?

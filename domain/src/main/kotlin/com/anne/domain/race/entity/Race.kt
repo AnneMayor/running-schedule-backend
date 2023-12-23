@@ -1,13 +1,9 @@
 package com.anne.domain.race.entity
 
 import com.anne.domain.common.entity.BaseEntity
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Table
+import jakarta.persistence.*
 import org.hibernate.envers.AuditOverride
 import org.hibernate.envers.Audited
-import org.springframework.data.annotation.Id
 import java.time.Instant
 
 @Entity
@@ -28,5 +24,5 @@ class Race(
 ) : BaseEntity() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val raceId: Long? = null
+    val raceId: Long = 0L
 }

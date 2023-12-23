@@ -14,7 +14,6 @@ class RaceCommandService(
     private val raceDomainService: RaceDomainService,
     private val raceDtoMapper: RaceDtoMapper,
 ) {
-
     fun createRaceOrNull(raceCreateReq: RaceCreateReq): RaceDto? {
         return raceDomainService.createRace(raceDomainService.createRace(raceDtoMapper.toDto(raceCreateReq)))
     }
