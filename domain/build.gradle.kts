@@ -9,8 +9,8 @@ jar.enabled = true
 plugins {
     id("org.springframework.boot")
     id("io.spring.dependency-management")
-    kotlin("jvm") version "1.8.22"
-    kotlin("plugin.spring") version "1.8.22"
+    kotlin("jvm")
+    kotlin("plugin.spring")
 }
 
 group = "com.anne"
@@ -19,6 +19,7 @@ val jsoupVersion: String by rootProject
 val kotestVersion: String by rootProject
 val mapStructVersion: String by rootProject
 val hibernateEnversVersion: String by rootProject
+val modelMapperVersion: String by rootProject
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -50,7 +51,10 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    implementation("org.modelmapper:modelmapper:$modelMapperVersion")
     implementation("org.mapstruct:mapstruct:$mapStructVersion")
+    kapt("org.mapstruct:mapstruct-processor:$mapStructVersion")
+    kaptTest("org.mapstruct:mapstruct-processor:$mapStructVersion")
     implementation("org.jsoup:jsoup:$jsoupVersion")
     testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
 }

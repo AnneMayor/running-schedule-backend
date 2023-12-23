@@ -9,8 +9,8 @@ jar.enabled = true
 plugins {
 	id("org.springframework.boot")
 	id("io.spring.dependency-management")
-	kotlin("jvm") version "1.8.22"
-	kotlin("plugin.spring") version "1.8.22"
+	kotlin("jvm")
+	kotlin("plugin.spring")
 }
 
 group = "com.anne"

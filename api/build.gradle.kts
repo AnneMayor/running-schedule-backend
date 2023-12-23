@@ -9,8 +9,8 @@ jar.enabled = false
 plugins {
     id("org.springframework.boot")
     id("io.spring.dependency-management")
-    kotlin("jvm") version "1.8.22"
-    kotlin("plugin.spring") version "1.8.22"
+    kotlin("jvm")
+    kotlin("plugin.spring")
 }
 
 group = "com.anne"
@@ -43,6 +43,8 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
     implementation("org.mapstruct:mapstruct:$mapStructVersion")
+    kapt("org.mapstruct:mapstruct-processor:$mapStructVersion")
+    kaptTest("org.mapstruct:mapstruct-processor:$mapStructVersion")
     testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
 }
 
