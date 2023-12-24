@@ -15,15 +15,17 @@ class CrawlerUtilTest : ShouldSpec({
         }
 
         should("parseDocument") {
-            val epoch = Instant.parse("2023-10-10T18:35:24.00Z").epochSecond
+            val epoch = Instant.now().epochSecond
             val url = "http://www.roadrun.co.kr/schedule/list.php?today=$epoch&todays=Y"
             val document = CrawlerUtil.getDocument(url)
             val numOfRunningRace = document.select("font[color=red]").text()
+            val host = CrawlerUtil.selectElements(document, "td[width=30%]").select("div[align=right][valign=bottom]")[0].selectFirst("a")
+                ?.attributes()?.first()?.value
             document shouldNotBe null
             document.allElements shouldNotBe null
             numOfRunningRace shouldNotBe null
 //            println(document)
-            println(numOfRunningRace)
+            println(host)
         }
     }
 })
