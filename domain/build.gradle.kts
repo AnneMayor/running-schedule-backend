@@ -16,7 +16,6 @@ plugins {
 group = "com.anne"
 version = "0.0.1-SNAPSHOT"
 val jsoupVersion: String by rootProject
-val kotestVersion: String by rootProject
 val mapStructVersion: String by rootProject
 val hibernateEnversVersion: String by rootProject
 val modelMapperVersion: String by rootProject
@@ -56,7 +55,6 @@ dependencies {
     kapt("org.mapstruct:mapstruct-processor:$mapStructVersion")
     kaptTest("org.mapstruct:mapstruct-processor:$mapStructVersion")
     implementation("org.jsoup:jsoup:$jsoupVersion")
-    testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
 }
 
 tasks.withType<KotlinCompile> {

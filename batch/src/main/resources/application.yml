@@ -1,1 +1,42 @@
-spring.datasource.using.running: true
+spring:
+  profiles:
+    include:
+      - domain
+      - infra-rds
+    active: local
+  batch:
+    race-crawling-chunk-size: 100
+    jdbc:
+      initialize-schema: always
+    job:
+      enabled: true
+  datasource:
+    runningdb:
+      writer:
+        maximum-pool-size: 10
+        minimum-idle: 10
+      reader:
+        maximum-pool-size: 10
+        minimum-idle: 10
+    using:
+      runningdb: true
+
+logging:
+  level:
+    root: info
+
+---
+spring:
+  config.activate.on-profile: local, test
+  datasource:
+    runningdb:
+      writer:
+        maximum-pool-size: 5
+        minimum-idle: 5
+      reader:
+        maximum-pool-size: 5
+        minimum-idle: 5
+
+  jpa:
+    show-sql: true
+
