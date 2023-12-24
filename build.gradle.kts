@@ -16,6 +16,12 @@ java {
     sourceCompatibility = JavaVersion.VERSION_17
 }
 
+configurations {
+    all {
+        exclude("org.apache.logging.log4j", "log4j-slf4j-impl")
+    }
+}
+
 repositories {
     mavenCentral()
 }
@@ -31,6 +37,7 @@ dependencies {
 
 allprojects {
     apply(plugin = "kotlin")
+    apply(plugin = "java")
     apply(plugin = "kotlin-kapt")
     apply(plugin = "org.jetbrains.kotlin.plugin.allopen")
 
