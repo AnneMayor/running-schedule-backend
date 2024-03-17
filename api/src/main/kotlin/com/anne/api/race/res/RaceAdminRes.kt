@@ -1,6 +1,6 @@
 package com.anne.api.race.res
 
-data class RaceRes(
+data class RaceAdminRes(
     val raceId: Long,
     var id: Long?,
     var name: String?,

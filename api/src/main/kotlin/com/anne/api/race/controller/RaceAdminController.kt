@@ -4,7 +4,7 @@ import com.anne.api.annotation.ApiPurpose
 import com.anne.api.annotation.Purpose
 import com.anne.api.race.mapper.RaceDtoMapper
 import com.anne.api.race.req.RaceCreateReq
-import com.anne.api.race.res.RaceRes
+import com.anne.api.race.res.RaceAdminRes
 import com.anne.api.race.service.RaceCommandService
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.PostMapping
@@ -14,16 +14,16 @@ import org.springframework.web.bind.annotation.RestController
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("running/race")
-class RaceController(
+@RequestMapping("running/admin/race")
+class RaceAdminController(
     private val raceCommandService: RaceCommandService,
     private val raceDtoMapper: RaceDtoMapper,
 ) {
-    @ApiPurpose(target = [Purpose.USER])
+    @ApiPurpose(target = [Purpose.ADMIN])
     @PostMapping
     fun createRunningRace(
         @RequestBody raceCreateReq: RaceCreateReq
-    ): RaceRes? {
-        return raceCommandService.createRaceOrNull(raceCreateReq)?.let(raceDtoMapper::toRes)
+    ): RaceAdminRes? {
+        return raceCommandService.createRaceOrNull(raceCreateReq)?.let(raceDtoMapper::toAdminRes)
     }
 }
