@@ -7,6 +7,7 @@ bootJar.enabled = false
 plugins {
     id("org.springframework.boot")
     id("io.spring.dependency-management")
+    id("org.jlleitschuh.gradle.ktlint-idea")
     kotlin("plugin.allopen")
     kotlin("jvm")
     kotlin("kapt")
