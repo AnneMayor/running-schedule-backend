@@ -1,5 +1,6 @@
 package com.anne.domain.common.entity
 
+import jakarta.persistence.Column
 import jakarta.persistence.EntityListeners
 import jakarta.persistence.MappedSuperclass
 import org.springframework.data.annotation.CreatedBy
@@ -13,15 +14,17 @@ import java.time.Instant
 @EntityListeners(AuditingEntityListener::class)
 abstract class BaseEntity {
     @CreatedBy
-    var createdBy: String? = null
+    @Column(name = "created_by", updatable = false)
+    var createdBy: String? = "System"
         protected set
 
     @CreatedDate
+    @Column(name = "created_at", updatable = false)
     var createdAt: Instant = Instant.now()
         protected set
 
     @LastModifiedBy
-    var modifiedBy: String? = null
+    var modifiedBy: String? = "System"
         protected set
 
     @LastModifiedDate

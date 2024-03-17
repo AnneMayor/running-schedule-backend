@@ -29,7 +29,7 @@ private const val DATASOURCE_READER = "reader"
 @EnableJpaRepositories(
     basePackages = ["com.anne.domain.*.repository"],
     entityManagerFactoryRef = "runningDbEntityManager",
-    transactionManagerRef = "runningDdTransactionManager"
+    transactionManagerRef = "runningDbTransactionManager"
 )
 class PostgresDbConfig {
 
@@ -85,7 +85,7 @@ class PostgresDbConfig {
         )
         return entityManagerFactoryBuilder
             .dataSource(routingDataSource())
-            .packages("com.anne.domain")
+            .packages("com.anne.domain.*")
             .build()
     }
 }

@@ -2,12 +2,15 @@ package com.anne.batch.race.reader
 
 import com.anne.batch.race.item.RaceItem
 import com.anne.domain.common.util.CrawlerUtil
+import com.anne.domain.common.util.DateTimeConvertor
 import com.anne.domain.common.util.UrlCreator
 import org.jsoup.nodes.Document
 import org.jsoup.select.Elements
 import org.springframework.batch.item.ItemReader
 import java.time.Instant
+import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.ZoneId
 
 
 data class HostInfo(
@@ -43,11 +46,18 @@ class RaceItemReader : ItemReader<RaceItem?> {
         val startOfRegistration = null // TODO("대회 신청일자 정보는 다른 곳에서 Crawling 해오는걸로!")
         val endOfRegistration = null // TODO("신청마감일 정보는 다른 곳에서 Crawling 해오는걸로!")
 
-        val crawlingData = mutableMapOf<String, String?>()
+        val crawlingData = mutableMapOf<String, Any?>()
 
         raceDates?.let {
             for (index in it.indices) {
-                val raceDay = "${LocalDateTime.now().year}/$raceDates[$index]"
+                val raceDay = DateTimeConvertor.convertStringToLocalDate(
+                    "${LocalDateTime.now().year}-${
+                        it[index].replace(
+                            "/",
+                            "-"
+                        )
+                    }"
+                )
                 val raceName = raceNames?.get(index)
                 crawlingData["day"] = raceDay
                 crawlingData["name"] = raceName
@@ -59,13 +69,16 @@ class RaceItemReader : ItemReader<RaceItem?> {
         }
 
         return RaceItem(
-            name = crawlingData["name"],
+            name = crawlingData["name"].toString(),
             description = null,
-            place = crawlingData["place"],
-            day = Instant.parse(crawlingData["day"]),
-            descriptionUrl = crawlingData["descriptionUrl"],
-            host = crawlingData["host"],
-            phoneNumber = crawlingData["phoneNumber"],
+            place = crawlingData["place"].toString(),
+            day = DateTimeConvertor.convertLocalDateToInstant(
+                crawlingData["day"] as LocalDate,
+                ZoneId.systemDefault()
+            ),
+            descriptionUrl = crawlingData["descriptionUrl"].toString(),
+            host = crawlingData["host"].toString(),
+            phoneNumber = crawlingData["phoneNumber"].toString(),
             entryFee = entryFee,
             startOfRegistration = startOfRegistration,
             endOfRegistration = endOfRegistration,
