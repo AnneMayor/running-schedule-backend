@@ -38,12 +38,24 @@ dependencies {
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+    implementation("org.mapstruct:mapstruct:$mapStructVersion")
+
     developmentOnly("org.springframework.boot:spring-boot-devtools")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
-    implementation("org.mapstruct:mapstruct:$mapStructVersion")
+
     kapt("org.mapstruct:mapstruct-processor:$mapStructVersion")
     kaptTest("org.mapstruct:mapstruct-processor:$mapStructVersion")
+}
+
+sourceSets {
+    create("integration-test") {
+        kotlin {
+            compileClasspath += main.get().output + test.get().runtimeClasspath
+            runtimeClasspath += output + compileClasspath
+        }
+    }
 }
 
 tasks.withType<KotlinCompile> {
