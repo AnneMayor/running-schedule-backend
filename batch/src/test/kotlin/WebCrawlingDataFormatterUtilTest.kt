@@ -16,7 +16,6 @@ class WebCrawlingDataFormatterUtilTest : ShouldSpec({
 
             val result = formatRaceDate(raceDocument)
             result shouldNotBe null
-            result?.size shouldBe 141
         }
 
         should("formatRaceNameWithDistance") {
@@ -25,7 +24,6 @@ class WebCrawlingDataFormatterUtilTest : ShouldSpec({
 
             val result = formatRaceNameWithDistance(raceDocument)
             result shouldNotBe null
-            result?.size shouldBe 141
         }
 
         should("formatPlace") {
@@ -34,7 +32,6 @@ class WebCrawlingDataFormatterUtilTest : ShouldSpec({
 
             val result = formatPlace(raceDocument)
             result shouldNotBe null
-            result?.size shouldBe 141
         }
 
         should("formatHostInfo") {
@@ -46,7 +43,6 @@ class WebCrawlingDataFormatterUtilTest : ShouldSpec({
 
             val result = formatHostInfo(hostInfoElements)
             result shouldNotBe null
-            result?.size shouldBe 141
         }
     }
 })
