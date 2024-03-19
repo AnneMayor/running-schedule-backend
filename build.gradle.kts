@@ -42,7 +42,7 @@ allprojects {
     apply(plugin = "kotlin-kapt")
     apply(plugin = "org.jetbrains.kotlin.plugin.allopen")
 
-    group = "com.anne.running-schedule"
+    group = "com.anne.running-schedule-backend"
     version = "1.0.0-SNAPSHOT"
 
     tasks.withType<KotlinCompile> {

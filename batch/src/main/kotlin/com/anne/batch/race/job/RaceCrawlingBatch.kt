@@ -45,17 +45,18 @@ class RaceCrawlingBatch(
     @Bean
     fun raceCrawlingBatchStep(): Step {
         return StepBuilder("race-crawling-step", jobRepository)
-            .chunk<RaceItem, RaceDto>(chunkSize, transactionManager)
+            .chunk<List<RaceItem>, List<RaceDto>>(chunkSize, transactionManager)
             .reader(raceItemReader())
             .processor(raceItemProcessor())
             .writer(raceItemWriter())
             .build()
     }
 
-    @Scheduled(cron = "* * * * * *")
+    // Every day at midnight(00:00 am)
+    @Scheduled(cron = "1 0 0 * * *")
     fun raceCrawlingBatchJobScheduler() {
-        val jobExecution = jobLauncher.run(raceCrawlingScheduledJob, JobParametersBuilder().addDate("timestamp", Date.from(Instant.now())).toJobParameters())
-        println("Job finished with status: ${jobExecution.status}")
+        jobLauncher.run(raceCrawlingScheduledJob, JobParametersBuilder().addDate("timestamp", Date.from(Instant.now())).toJobParameters())
+            .also { println("Job finished with status: ${it.status}") }
     }
 
     fun raceItemReader() = RaceItemReader()

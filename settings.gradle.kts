@@ -1,4 +1,4 @@
-rootProject.name = "running-schedule"
+rootProject.name = "running-schedule-backend"
 
 include("api")
 include("batch", "infra-rds")
